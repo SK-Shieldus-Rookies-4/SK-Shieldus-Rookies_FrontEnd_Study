@@ -60,9 +60,56 @@
                     <th>액션</th>
                 </tr>
             </thead>
-            <tbody></tbody>
+            <tbody id="bookTableBody"></tbody>
         </table>
     </div>
+
+    <script type="text/javascript">
+        //전역변수
+        const API_BASE_URL = "http://localhost:8080";
+
+        // DOM 요소 가져오기
+        const bookForm = document.getElementById("bookForm");
+        const bookTableBody = document.getElementById("bookTableBody"); // 도서 리스트 테이블의 tbody
+
+        // 페이지 로드 시 도서 목록 불러오기
+        document.addEventListener("DOMContentLoaded", function () {
+            LoadBooks();
+        });
+
+        // 폼 제출 이벤트
+        bookForm.addEventListener("submit", function (event) {
+            event.preventDefault(); 
+            console.log("[book] Form이 제출 되었음.....");
+
+            // FormData 생성
+            const bookFormData = new FormData(bookForm);
+            bookFormData.forEach((value, key) => {
+                console.log(`${key} = ${value}`);
+            });
+
+            // 객체 형태로 변환
+            const bookData = {
+                title: bookFormData.get("title").trim(),
+                author: bookFormData.get("author").trim(),
+                isbn: bookFormData.get("isbn").trim(),
+                price: bookFormData.get("price").trim(),
+                publishDate: bookFormData.get("publishDate")
+            };
+
+            console.log("변환된 도서 객체:", bookData);
+
+        });
+
+        // 도서 목록 불러오기
+        function LoadBooks() {
+            console.log("도서 목록 Load 중...");
+        }
+
+        // **폼 초기화**
+        bookForm.reset();
+    </script>
+
 </body>
 
 </html>
