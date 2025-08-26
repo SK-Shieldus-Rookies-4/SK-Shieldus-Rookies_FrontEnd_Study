@@ -75,7 +75,7 @@
                     <th>액션</th>
                 </tr>
             </thead>
-            <tbody></tbody>
+            <tbody id="studentTableBody"></tbody>
         </table>
     </div>
 
@@ -86,6 +86,11 @@
       //DOM 엘리먼트 가져오기
       const studentForm = document.getElementById("studentForm");
       const studentTableBody = document.getElementById("studentTableBody");
+
+      //Document Load 이벤트 처리하기
+      document.addEventListener("DOMContentLoaded", function() {
+        fetchStudents();
+      });
     </script>
 </body>
 
