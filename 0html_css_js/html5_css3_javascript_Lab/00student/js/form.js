@@ -25,11 +25,13 @@ studentForm.addEventListener("submit", function (event) {
     const studentData = {
         name: stuFormData.get("name").trim(),
         studentNumber: stuFormData.get("studentNumber").trim(),
-        address: stuFormData.get("address").trim(),
-        phoneNumber: stuFormData.get("phoneNumber").trim(),
-        email: stuFormData.get("email").trim(),
-        dateOfBirth: stuFormData.get("dateOfBirth"),
-    };
+        detailRequest: {
+            address: stuFormData.get("address").trim(),
+            phoneNumber: stuFormData.get("phoneNumber").trim(),
+            email: stuFormData.get("email").trim(),
+            dateOfBirth: stuFormData.get("dateOfBirth") || null,
+        }
+    }
 
     //유효성 체크하는 함수 호출하기
     if (!validateStudent(studentData)) {
@@ -40,7 +42,45 @@ studentForm.addEventListener("submit", function (event) {
     //유효한 데이터 출력하기
     console.log(studentData);
 
+    // 서버로 Student 등록 요청하기
+    createStudent(studentData);
+
 }); //submit 이벤트
+
+//Student 등록 함수
+function createStudent(studentData) {
+    fetch(`${API_BASE_URL}/api/students`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(studentData)  //Object => json
+    })
+        .then(async (response) => {
+            if (!response.ok) {
+                //응답 본문을 읽어서 에러 메시지 추출
+                const errorData = await response.json();
+                //status code와 message를 확인하기
+                if (response.status === 409) {
+                    //중복 오류 처리
+                    throw new Error(errorData.message || '중복 되는 정보가 있습니다.');
+                } else {
+                    //기타 오류 처리
+                    throw new Error(errorData.message || '학생 등록에 실패했습니다.')
+                }
+            }
+            return response.json();
+        })
+        .then((result) => {
+            alert("학생이 성공적으로 등록되었습니다!");
+            //입력 Form의 input의 값 초기화
+            studentForm.reset();
+            //목록 새로 고침
+            loadStudents();
+        })
+        .catch((error) => {
+            console.log('Error : ', error);
+            alert(error.message);
+        });
+}//createStudent
 
 //입력항목의 값의 유효성을 체크하는 함수
 function validateStudent(student) {// 필수 필드 검사
@@ -103,9 +143,9 @@ function loadStudents() {
     console.log("학생 목록 Load 중.....");
     fetch(`${API_BASE_URL}/api/students`) //Promise
         .then((response) => {
-            if (!response.ok) {
-                throw new Error("<<< 학생 목록을 불러오는데 실패했습니다!.");
-            }
+            // if (!response.ok) {
+            //     throw new Error("<<< 학생 목록을 불러오는데 실패했습니다!.");
+            // }
             return response.json();
         })
         .then((students) => renderStudentTable(students))
