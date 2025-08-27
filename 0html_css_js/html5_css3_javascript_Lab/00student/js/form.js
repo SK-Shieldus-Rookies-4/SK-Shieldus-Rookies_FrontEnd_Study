@@ -29,7 +29,7 @@ studentForm.addEventListener("submit", function (event) {
         phoneNumber: stuFormData.get("phoneNumber").trim(),
         email: stuFormData.get("email").trim(),
         dateOfBirth: stuFormData.get("dateOfBirth"),
-    }
+    };
 
     //유효성 체크하는 함수 호출하기
     if (!validateStudent(studentData)) {
@@ -104,14 +104,14 @@ function loadStudents() {
     fetch(`${API_BASE_URL}/api/students`) //Promise
         .then((response) => {
             if (!response.ok) {
-                throw new Error("학생 목록을 불러오는데 실패했습니다!.");
+                throw new Error("<<< 학생 목록을 불러오는데 실패했습니다!.");
             }
             return response.json();
         })
         .then((students) => renderStudentTable(students))
         .catch((error) => {
             console.log("Error: " + error);
-            alert("학생 목록을 불러오는데 실패했습니다!.");
+            alert(">>>> 학생 목록을 불러오는데 실패했습니다!.");
         });
 };
 
