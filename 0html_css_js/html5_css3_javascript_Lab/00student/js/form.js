@@ -271,7 +271,7 @@ function isValidEmail(email) {
 //Student(학생) 목록을 Load 하는 함수
 function loadStudents() {
     console.log("학생 목록 Load 중.....");
-    fetch(`${API_BASE_URL}/api/students2`) //Promise
+    fetch(`${API_BASE_URL}/api/students`) //Promise
         .then(async (response) => {
             if (!response.ok) {
                 //응답 본문을 읽어서 에러 메시지 추출
