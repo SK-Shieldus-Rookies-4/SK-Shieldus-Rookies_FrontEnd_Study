@@ -1,25 +1,21 @@
-//전역변수
+// 전역변수
 const API_BASE_URL = "http://localhost:8080";
 
 // DOM 요소 가져오기
 const bookForm = document.getElementById("bookForm");
-const bookTableBody = document.getElementById("bookTableBody"); // 도서 리스트 테이블의 tbody
+const bookTableBody = document.getElementById("bookTableBody");
 
 // 페이지 로드 시 도서 목록 불러오기
 document.addEventListener("DOMContentLoaded", function () {
-    LoadBooks();
+    loadBooks(); // 소문자로 수정
 });
 
 // 폼 제출 이벤트
 bookForm.addEventListener("submit", function (event) {
     event.preventDefault();
-    console.log("[book] Form이 제출 되었음.....");
 
     // FormData 생성
     const bookFormData = new FormData(bookForm);
-    bookFormData.forEach((value, key) => {
-        console.log(`${key} = ${value}`);
-    });
 
     // 객체 형태로 변환
     const bookData = {
@@ -30,42 +26,39 @@ bookForm.addEventListener("submit", function (event) {
         publishDate: bookFormData.get("publishDate")
     };
 
-    if (!validateBook(bookData)) {
-        return;
-    }
+    if (!validateBook(bookData)) return;
 
     console.log(bookData);
-
 });
 
+// 유효성 검사
 function validateBook(book) {
-    if (!book.title || !book.author || !book.isbn || !book.price || !book.publishDate) {
-        alert("모든 필드를 입력해야 합니다.");
-        return false;
-    }
+    if (!book.title) { alert("책 제목을 입력해야 합니다."); return false; }
+    if (!book.author) { alert("저자를 입력해야 합니다."); return false; }
+    if (!book.isbn) { alert("ISBN을 입력해야 합니다."); return false; }
+    if (!book.price || Number(book.price) <= 0) { alert("가격은 0보다 큰 숫자여야 합니다."); return false; }
+    if (!book.publishDate) { alert("출판일을 입력해야 합니다."); return false; }
     return true;
 }
 
+// 도서 목록 불러오기
 function loadBooks() {
-    console.log("도서 목록 Load 중...");
     fetch(`${API_BASE_URL}/api/books`)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("도서 목록을 불러오는데 실패했습니다.");
-            }
+        .then(response => {
+            if (!response.ok) throw new Error("도서 목록 불러오기 실패");
             return response.json();
         })
-        .then((books) => renderBookTable(books))
-        .catch((error) => {
-            console.log("Error: " + error);
+        .then(books => renderBookTable(books))
+        .catch(error => {
+            console.error(error);
             alert("도서 목록을 불러오는데 실패했습니다.");
-        });       
-};
+        });
+}
 
+// 테이블 렌더링
 function renderBookTable(books) {
-    console.log(books);
     bookTableBody.innerHTML = "";
-    books.forEach((book) => {
+    books.forEach(book => {
         const row = document.createElement("tr");
         row.innerHTML = `
             <td>${book.title}</td>
@@ -74,10 +67,14 @@ function renderBookTable(books) {
             <td>${book.price}</td>
             <td>${book.publishDate}</td>
             <td>
-                <button class="edit-btn" onclick="editBook(${book.id})">수정</button>
-                <button class="delete-btn" onclick="deleteBook(${book.id})">삭제</button>
+                <button onclick="editBook(${book.id})">수정</button>
+                <button onclick="deleteBook(${book.id})">삭제</button>
             </td>
         `;
         bookTableBody.appendChild(row);
     });
 }
+
+// 임시 삭제/수정
+function deleteBook(id) { alert(`삭제: ${id}`); }
+function editBook(id) { alert(`수정: ${id}`); }
