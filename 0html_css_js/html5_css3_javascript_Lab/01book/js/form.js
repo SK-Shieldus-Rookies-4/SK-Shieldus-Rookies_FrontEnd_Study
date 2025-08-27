@@ -7,7 +7,7 @@ const bookTableBody = document.getElementById("bookTableBody");
 
 // 페이지 로드 시 도서 목록 불러오기
 document.addEventListener("DOMContentLoaded", function () {
-    loadBooks(); // 소문자로 수정
+    loadBooks(); 
 });
 
 // 폼 제출 이벤트
