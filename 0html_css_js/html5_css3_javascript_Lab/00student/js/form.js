@@ -81,15 +81,16 @@ function createStudent(studentData) {
             return response.json();
         })
         .then((result) => {
-            alert("학생이 성공적으로 등록되었습니다!");
+            showSuccess("학생이 성공적으로 등록되었습니다!");
             //입력 Form의 input의 값 초기화
-            studentForm.reset();
+            //studentForm.reset();
+            resetForm();
             //목록 새로 고침
             loadStudents();
         })
         .catch((error) => {
             console.log('Error : ', error);
-            alert(error.message);
+            showError(error.message);
         });
 }//createStudent
 
