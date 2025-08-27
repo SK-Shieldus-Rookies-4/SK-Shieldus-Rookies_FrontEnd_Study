@@ -76,5 +76,5 @@ function renderBookTable(books) {
 }
 
 // 임시 삭제/수정
-function deleteBook(id) { alert(`삭제: ${id}`); }
-function editBook(id) { alert(`수정: ${id}`); }
+//function deleteBook(id) { alert(`삭제: ${id}`); }
+//function editBook(id) { alert(`수정: ${id}`); }
