@@ -163,7 +163,7 @@ function editBook(id) {
 // 도서 수정 실제 적용
 function updateBook(id, bookData) {
   fetch(`${API_BASE_URL}/api/books/${id}`, {
-    method: "PATCH",
+    method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(bookData),
   })
