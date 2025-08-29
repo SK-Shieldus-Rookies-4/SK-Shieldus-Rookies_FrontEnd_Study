@@ -1,3 +1,7 @@
+import { stringUtils } from '../utils/helpers';
+
+const { isEmpty } = stringUtils;
+
 // 유효성 검사 모듈 - 구조분해할당과 화살표 함수 사용
 
 // 정규식 패턴들 - 각 필드의 유효한 형식을 정의
