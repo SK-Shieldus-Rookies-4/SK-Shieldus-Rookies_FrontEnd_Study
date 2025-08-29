@@ -18,8 +18,7 @@ export const formatDate = (dateString, locale = 'ko-KR') => {
         return dateString
     }
 }
-
-// stringUtils.safeTrim(), const { safeTrim, isEmpty } = stringUtils
+// stringUtils.safeTrim() ,  const { safeTrim, isEmpty } = stringUtils;
 // 문자열 유틸리티 (화살표 함수)
 export const stringUtils = {
     // 안전한 trim
@@ -114,6 +113,7 @@ export const storageUtils = {
     // 데이터 저장 (화살표 함수)
     set: (key, value) => {
         try {
+            //object => json으로 변환
             const data = JSON.stringify(value)
             localStorage.setItem(key, data)
             return true
@@ -128,6 +128,7 @@ export const storageUtils = {
         try {
             const item = localStorage.getItem(key)
             if (item === null) return defaultValue
+            //json => object
             return JSON.parse(item)
         } catch (error) {
             console.error('로컬 스토리지 읽기 오류:', error)
