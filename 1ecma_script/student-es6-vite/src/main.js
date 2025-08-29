@@ -245,24 +245,20 @@ const renderStudentTable = (students) => {
     // 테이블 내용 초기화
     elements.tableBody.innerHTML = ''
     
-    // 학생이 없는 경우
+    // 학생이 없는 경우 등록된 학생이 없습니다.
     if (students.length === 0) {
-        elements.tableBody.innerHTML = `
-            <tr>
-                <td colspan="7" style="text-align: center; color: #666; padding: 20px;">
-                    등록된 학생이 없습니다.
-                </td>
-            </tr>
-        `
+        renderErrorTable('등록된 학생이 없습니다.')
         return
     }
     
     // 각 학생 행 생성 (일반적인 for 루프 사용)
-    for (let i = 0; i < students.length; i++) {
-        const student = students[i]
+    //for (let i = 0; i < students.length; i++) {
+        // const student = students[i]
+    for(let student of students) {
         const row = createStudentRow(student)
         elements.tableBody.appendChild(row)
-    }
+    }    
+    //}
 }
 
 // 학생 행 생성 (구조분해할당과 템플릿 리터럴)
