@@ -6,6 +6,7 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
 
+  //<>는 <React.Fragment> 를 생략
   return (
     <>
       <div>
