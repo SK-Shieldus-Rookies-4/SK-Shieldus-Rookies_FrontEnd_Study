@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
+import PropTypes from 'prop-types';
 import './Form.css';
 
 class Form extends Component {
     render() {
-        const { todo, myEnter, myChange, myCreate } = this.props;
+        const { mytodo, myEnter, myChange, myCreate } = this.props;
         return (
             <div className="form">
                 <input value={todo} onChange={myChange}
@@ -15,5 +16,12 @@ class Form extends Component {
         );
     }
 }
+
+Form.propTypes = {
+    mytodo: PropTypes.string.isRequired,
+    myEnter: PropTypes.func.isRequired,
+    myChange: PropTypes.func.isRequired,
+    myCreate: PropTypes.func.isRequired
+};
 
 export default Form;
