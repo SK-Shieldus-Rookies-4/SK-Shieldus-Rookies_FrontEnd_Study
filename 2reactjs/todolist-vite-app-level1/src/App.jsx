@@ -19,7 +19,7 @@ class App extends Component {
     this.setState({
       todo: e.target.value // input field의 다음 바뀔 값
     });
-  }
+  }; //handleChange
 
   handleCreate = () => {
     const { todo, todos } = this.state;
@@ -33,14 +33,21 @@ class App extends Component {
       todos: [...todos, newTodo],
       todo: '', // input 초기화
     });
-  }
-  
+  }; //handleCreate
+
   handleEnter = (e) => {
     // 눌려진 키가 Enter Key 이면 handleCreate 호출
     if (e.keyCode === 13) {
       this.handleCreate();
     }
-  };
+  }; //handleEnter
+
+  handleToggle = (id) => {
+    const { todos } = this.state;
+    this.setState({
+      todos: todos.map(todo => todo.id === id ? { ...todo, checked: !todo.checked } : todo)
+    });
+  }; //handleToggle
 
   render() {
     const { todo, todos } = this.state;
@@ -48,12 +55,12 @@ class App extends Component {
 
     return (
       <TodoListTemplate form=
-      {<Form 
-        mytodo={todo} 
-        myEnter={handleEnter} 
-        myChange={handleChange}
-        myCreate={handleCreate} />
-      }>
+        {<Form
+          mytodo={todo}
+          myEnter={handleEnter}
+          myChange={handleChange}
+          myCreate={handleCreate} />
+        }>
         <TodoItemList myTodos={todos} />
       </TodoListTemplate>
     );
