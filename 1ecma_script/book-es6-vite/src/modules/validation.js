@@ -1,5 +1,3 @@
-// validation.js
-
 import { stringUtils } from '../utils/helpers'
 
 // 구조 분해 할당

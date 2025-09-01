@@ -1,5 +1,3 @@
-// ui.js
-
 // UI 모듈
 export const ui = {
   /**

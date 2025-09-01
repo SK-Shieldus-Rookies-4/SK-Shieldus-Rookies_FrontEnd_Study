@@ -1,7 +1,5 @@
-// CSS 파일 불러오기
 import './css/style.css'
 
-// 모듈 불러오기
 import { apiService } from './modules/api.js'
 import { validateBook } from './modules/validation.js'
 import { ui } from './modules/ui.js'
@@ -74,27 +72,7 @@ const handleFormSubmit = async () => {
   }
 }
 
-// 폼 데이터 가져오기
-// const getFormData = () => {
-//   const formData = new FormData(elements.form)
-//   const title = formData.get('title') || ''
-//   const author = formData.get('author') || ''
-//   const publisher = formData.get('publisher') || ''
-//   const publishDate = formData.get('publishDate') || ''
-//   const isbn = formData.get('isbn') || ''
-
-//   return {
-//     title: title.trim(),
-//     author: author.trim(),
-//     detailRequest: {
-//       publisher: publisher.trim(),
-//       publishDate: publishDate,
-//       isbn: isbn.trim(),
-//     },
-//   }
-// }
-
-// 폼 데이터 가져오기 (수정/등록 공용)
+// 폼 데이터 가져오기 
 const getFormData = () => {
   const form = elements.form;
   const title = form.elements.title.value.trim();
@@ -108,8 +86,8 @@ const getFormData = () => {
     title,
     author,
     price: price ? Number(price) : null,
-    publish_date: publishDate || null,  // 서버가 expect하는 키
-    publisher_id: null, // 필요하면 실제 publisher ID 넣기
+    publish_date: publishDate || null,
+    publisher_id: null,
     detailRequest: {
       isbn,
       publisher,
@@ -135,23 +113,6 @@ const createBook = async (bookData) => {
     ui.setButtonLoading(elements.submitButton, false, '도서 등록')
   }
 }
-
-// // 책 수정
-// const updateBook = async (bookId, bookData) => {
-//   try {
-//     ui.setButtonLoading(elements.submitButton, true, '수정 중...')
-//     await apiService.updateBook(bookId, bookData)
-
-//     ui.showSuccessMessage('도서가 성공적으로 수정되었습니다.')
-//     resetForm()
-//     await loadBooks()
-//   } catch (error) {
-//     console.error('수정 오류:', error)
-//     ui.showErrorMessage(error.message)
-//   } finally {
-//     ui.setButtonLoading(elements.submitButton, false, '도서 등록')
-//   }
-// }
 
 // updateBook
 const updateBook = async (bookId, bookData) => {
