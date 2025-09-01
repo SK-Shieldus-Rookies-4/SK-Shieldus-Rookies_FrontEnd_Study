@@ -17,6 +17,7 @@ class MyComponent extends Component {
         //destructuring assignment 
         const { name, age } = this.props;
         const { value } = this.state;
+        const { handleDecrement } = this;
 
         return (
             <div>
@@ -26,7 +27,7 @@ class MyComponent extends Component {
                 <button onClick={() => (
                     this.setState({value: value + 1})
                 )}>증가</button>
-                <button onClick={this.handleDecrement}>감소</button>
+                <button onClick={handleDecrement}>감소</button>
             </div>
         );
     }
