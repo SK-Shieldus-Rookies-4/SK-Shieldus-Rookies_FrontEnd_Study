@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './MyComponent.css';
 
 class MyComponent extends Component {
     //컴포넌트 내부에 상태변수를 포함하는 state 객체선언
     state = {
         value: 0,  
         message: '',
-        username: ''
+        username: '',
+        isValid: false,
     };
     //event handler 함수선언
     handleDecrement = () => {
@@ -14,6 +16,7 @@ class MyComponent extends Component {
             value: this.state.value - 1
         });
     }; //handleDecrement
+
     handleChange = (e) => {
         this.setState({
             /*
@@ -24,11 +27,15 @@ class MyComponent extends Component {
         });
     } //handleChange
 
+    handleEnter = () => {
+
+    } //handleEnter
+
     render() {
         //destructuring assignment 
         const { name, age } = this.props;
-        const { value, message, username } = this.state;
-        const { handleDecrement, handleChange } = this;
+        const { value, message, username, isValid } = this.state;
+        const { handleDecrement, handleChange, handleEnter } = this;
 
         return (
             <div>
@@ -39,11 +46,15 @@ class MyComponent extends Component {
                     this.setState({value: value + 1})
                 )}>증가</button>
                 <button onClick={handleDecrement}>감소</button>
-                <br/>
+                <br />
                 <p>상태변수 message = {message}</p>
-                <input name = "message" value={message} onChange={handleChange} />
+                <input name = "message" value={message} onChange={handleChange} onKeyDown={handleEnter}/>
+
                 <p>상태변수 username = {username}</p>
-                <input name = "username" value={username} onChange={handleChange} />
+                <input name = "username" value={username} onChange={handleChange}
+                    className={isValid ? 'success' : 'failure'}
+                    ref={(ref) => { this.myUsername=ref }}
+                />    
 
             </div>
         );
