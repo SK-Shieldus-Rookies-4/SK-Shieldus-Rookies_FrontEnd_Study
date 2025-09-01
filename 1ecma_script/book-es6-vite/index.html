@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>도서 관리 시스템</title>
-  <link rel="stylesheet" type="text/css" href="./css/form.css" />
+  <link rel="stylesheet" type="text/css" href="./src/css/style.css" />
 </head>
 
 <body>
@@ -39,7 +40,13 @@
           <input type="date" name="publishDate" id="publishDate" required>
         </div>
 
+        <div class="form-group">
+          <label for="publisher">출판사:</label>
+          <input type="text" name="publisher" id="publisher">
+        </div>
+
         <button type="submit">도서 등록</button>
+        <button type="button" class="cancel-btn" style="display:none;">취소</button>
       </div>
     </form>
   </div>
