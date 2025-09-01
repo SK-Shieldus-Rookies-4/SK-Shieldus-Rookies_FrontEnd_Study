@@ -31,8 +31,10 @@ class MyComponent extends Component {
         if(e.keyCode == 13) {
             this.setState({
                 isValid: true,
-
+                //첫번째 Input 앨리먼트 필드 초기화
+                message: ''
             });
+            this.myUsername.focus();
         }
 
     } //handleEnter
