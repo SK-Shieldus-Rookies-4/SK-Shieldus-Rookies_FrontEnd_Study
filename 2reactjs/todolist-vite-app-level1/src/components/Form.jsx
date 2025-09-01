@@ -7,7 +7,7 @@ class Form extends Component {
         const { mytodo, myEnter, myChange, myCreate } = this.props;
         return (
             <div className="form">
-                <input value={todo} onChange={myChange}
+                <input value={mytodo} onChange={myChange}
                     onKeyDown={myEnter} />
                 <div className="create-button" onClick={myCreate}>
                     추가

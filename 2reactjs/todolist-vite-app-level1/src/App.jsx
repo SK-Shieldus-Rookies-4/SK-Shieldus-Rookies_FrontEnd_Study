@@ -49,7 +49,7 @@ class App extends Component {
     return (
       <TodoListTemplate form=
       {<Form 
-        todo={todo} 
+        mytodo={todo} 
         myEnter={handleEnter} 
         myChange={handleChange}
         myCreate={handleCreate} />
