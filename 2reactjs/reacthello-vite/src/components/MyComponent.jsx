@@ -27,7 +27,13 @@ class MyComponent extends Component {
         });
     } //handleChange
 
-    handleEnter = () => {
+    handleEnter = (e) => {
+        if(e.keyCode == 13) {
+            this.setState({
+                isValid: true,
+
+            });
+        }
 
     } //handleEnter
 
