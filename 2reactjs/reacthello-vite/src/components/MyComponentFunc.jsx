@@ -9,9 +9,13 @@ const MyComponentFunc = ({ name, children }) => {
         username: ''
     });
     const [valid, setValid] = useState(false);
+    const [messageArr, setMessageArr] = useState(['Angular', 'React', 'Vue', 'Ember']);
     const myUsername = useRef(null);
 
     const { message, username } = inputs;
+    const messageList = messageArr.map(
+        (msg, idx) => (<li key={idx}>{msg}</li>)
+    );
 
     //event handlers
     const handleChange = (e) => {
@@ -21,8 +25,9 @@ const MyComponentFunc = ({ name, children }) => {
         });
     };
     const handleEnter = (e) => {
-        if(e.keyCode === 13){
+        if (e.keyCode === 13) {
             setValid(true);
+            setMessageArr([...messageArr, message]);
             setInputs({
                 ...inputs,
                 message: ''
@@ -41,12 +46,16 @@ const MyComponentFunc = ({ name, children }) => {
             <button onClick={() => (setValue(value - 1))}>감소</button>
             <br />
             <p>상태변수 message = {message}</p>
-            <input name="message" value={message} onChange={handleChange} 
+            <input name="message" value={message} onChange={handleChange}
                 onKeyDown={handleEnter}
             />
+            <br />
+            <ul>
+                {messageList}
+            </ul>
             <p>상태변수 username = {username}</p>
-            <input name="username" value={username} onChange={handleChange} 
-                className={ valid ? 'success':'failure'}
+            <input name="username" value={username} onChange={handleChange}
+                className={valid ? 'success' : 'failure'}
                 ref={myUsername}
             />
 

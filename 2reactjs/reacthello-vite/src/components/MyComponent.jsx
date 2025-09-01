@@ -66,7 +66,6 @@ class MyComponent extends Component {
                 <ul>
                     {messageList}
                 </ul>
-
                 <p>상태변수 username = {username}</p>
                 <input name = "username" value={username} onChange={handleChange}
                     className={isValid ? 'success' : 'failure'}
