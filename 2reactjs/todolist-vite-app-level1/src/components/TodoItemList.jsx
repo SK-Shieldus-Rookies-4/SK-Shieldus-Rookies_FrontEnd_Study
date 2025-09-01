@@ -13,7 +13,6 @@ class TodoItemList extends Component {
         );
     }
 }
-
 TodoItemList.propTypes = {
     myTodos: PropTypes.array,
     myToggle: PropTypes.func,
