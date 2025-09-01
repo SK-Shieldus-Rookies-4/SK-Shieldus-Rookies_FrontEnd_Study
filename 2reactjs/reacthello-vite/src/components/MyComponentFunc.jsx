@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import './MyComponent.css';
 
 const MyComponentFunc = ({ name, children }) => {
     //useState() 함수사용
@@ -7,6 +8,8 @@ const MyComponentFunc = ({ name, children }) => {
         message: '',
         username: ''
     });
+    const [valid, setValid] = useState(false);
+    const myUsername = useRef(null);
 
     const { message, username } = inputs;
 
@@ -16,6 +19,16 @@ const MyComponentFunc = ({ name, children }) => {
             ...inputs,
             [e.target.name]: e.target.value
         });
+    };
+    const handleEnter = (e) => {
+        if(e.keyCode === 13){
+            setValid(true);
+            setInputs({
+                ...inputs,
+                message: ''
+            });
+            myUsername.current.focus();
+        }//if
     };
 
     return (
@@ -28,9 +41,15 @@ const MyComponentFunc = ({ name, children }) => {
             <button onClick={() => (setValue(value - 1))}>감소</button>
             <br />
             <p>상태변수 message = {message}</p>
-            <input name="message" value={message} onChange={handleChange} />
+            <input name="message" value={message} onChange={handleChange} 
+                onKeyDown={handleEnter}
+            />
             <p>상태변수 username = {username}</p>
-            <input name="username" value={username} onChange={handleChange} />
+            <input name="username" value={username} onChange={handleChange} 
+                className={ valid ? 'success':'failure'}
+                ref={myUsername}
+            />
+
         </div>
     );
 };
