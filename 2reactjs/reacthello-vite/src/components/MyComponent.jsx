@@ -9,6 +9,7 @@ class MyComponent extends Component {
         message: '',
         username: '',
         isValid: false,
+        messageArr: ['Angular', 'React', 'Vue', 'Ember']
     };
     //event handler 함수선언
     handleDecrement = () => {
@@ -42,8 +43,9 @@ class MyComponent extends Component {
     render() {
         //destructuring assignment 
         const { name, age } = this.props;
-        const { value, message, username, isValid } = this.state;
+        const { value, message, username, isValid, messageArr } = this.state;
         const { handleDecrement, handleChange, handleEnter } = this;
+        const messageList = messageArr.map();
 
         return (
             <div>
@@ -57,6 +59,10 @@ class MyComponent extends Component {
                 <br />
                 <p>상태변수 message = {message}</p>
                 <input name = "message" value={message} onChange={handleChange} onKeyDown={handleEnter}/>
+                <br />
+                <ul>
+                    {messageList}
+                </ul>
 
                 <p>상태변수 username = {username}</p>
                 <input name = "username" value={username} onChange={handleChange}
