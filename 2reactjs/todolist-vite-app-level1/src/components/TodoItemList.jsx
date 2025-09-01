@@ -5,10 +5,21 @@ import TodoItem from './TodoItem';
 class TodoItemList extends Component {
     render() {
         const { myTodos, myToggle, myRemove } = this.props;
+        /*
+           const { id,text,checked } = todo;
+        */
+        const todoList = myTodos.map(({ id, text, checked }) => (
+            <TodoItem id={id} 
+                      text={text} 
+                      checked={checked} 
+                      onToggle={myToggle} 
+                      onRemove={myRemove}
+                      key={id}
+            />
+        ));
         return (
             <div>
-                <TodoItem text="오늘의 할일1" checked={false} />
-                <TodoItem text="오늘의 할일2" checked={true} />
+                {todoList}
             </div>
         );
     }
@@ -19,5 +30,4 @@ TodoItemList.propTypes = {
     myToggle: PropTypes.func,
     myRemove: PropTypes.func
 };
-
 export default TodoItemList;
