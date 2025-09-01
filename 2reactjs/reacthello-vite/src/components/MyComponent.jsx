@@ -16,7 +16,11 @@ class MyComponent extends Component {
     }; //handleDecrement
     handleChange = (e) => {
         this.setState({
-            message: e.target.value
+            /*
+               message: e.target.value
+               username: e.target.value
+            */
+            [e.target.name]: e.target.value
         });
     } //handleChange
 
@@ -37,7 +41,9 @@ class MyComponent extends Component {
                 <button onClick={handleDecrement}>감소</button>
                 <br/>
                 <p>상태변수 message = {message}</p>
-                <input value={message} onChange={handleChange} />
+                <input name = "message" value={message} onChange={handleChange} />
+                <p>상태변수 username = {username}</p>
+                <input name = "username" value={username} onChange={handleChange} />
 
             </div>
         );
