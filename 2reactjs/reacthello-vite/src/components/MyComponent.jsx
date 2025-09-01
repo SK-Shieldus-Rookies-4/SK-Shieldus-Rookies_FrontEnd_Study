@@ -29,9 +29,12 @@ class MyComponent extends Component {
     } //handleChange
 
     handleEnter = (e) => {
+        const { message, messageArr } = this.state;
+
         if(e.keyCode == 13) {
             this.setState({
                 isValid: true,
+                messageArr: [...messageArr, message],
                 //첫번째 Input 앨리먼트 필드 초기화
                 message: ''
             });
