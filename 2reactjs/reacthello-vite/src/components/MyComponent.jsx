@@ -15,7 +15,7 @@ class MyComponent extends Component {
     handleDecrement = () => {
         this.setState({
             value: this.state.value - 1
-        });
+        });     
     }; //handleDecrement
 
     handleChange = (e) => {
