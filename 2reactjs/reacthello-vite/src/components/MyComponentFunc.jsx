@@ -1,15 +1,15 @@
-import React, { use, useState } from 'react';
+import React, { useState } from 'react';
 
-const MyComponentFunc = ({name, children}) => {
+const MyComponentFunc = ({ name, children }) => {
     //useState() 함수사용
-    const [value,setValue] = useState(0);
+    const [value, setValue] = useState(0);
     const [inputs, setInputs] = useState({
-        message: '',
+        message: '', 
         username: ''
     });
 
     const { message, username } = inputs;
-
+ 
     return (
         <div>
             <h2>함수형 컴포넌트</h2>
