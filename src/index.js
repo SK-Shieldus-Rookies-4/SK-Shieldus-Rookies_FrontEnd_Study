@@ -1,12 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './containers/App';
 import reportWebVitals from './reportWebVitals';
+
+//리덕스 관련 불러오기
+import {createStore} from 'redux';
+import reducers from './reducers';
+import {Provider} from 'react-redux';
+
+const store = createStore(reducers);
 
 ReactDOM.render(
   <React.StrictMode>
+    <Provider store={store}>
     <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
