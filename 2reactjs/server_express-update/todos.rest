@@ -1,0 +1,22 @@
+GET  http://localhost:4500/api/todos
+
+###
+GET http://localhost:4500/api/todos/1
+
+###
+POST http://localhost:4500/api/todos
+content-type: application/json
+
+{
+    "text": "Todo4",
+    "checked": true
+}
+
+###
+PATCH http://localhost:4500/api/todos/1
+content-type: application/json
+
+{  "checked": true  }
+
+###
+DELETE http://localhost:4500/api/todos/4
