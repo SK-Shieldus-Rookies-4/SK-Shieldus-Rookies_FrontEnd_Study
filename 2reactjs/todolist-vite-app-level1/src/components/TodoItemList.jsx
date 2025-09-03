@@ -18,7 +18,7 @@ class TodoItemList extends Component {
     }
 
     render() {
-        const { myTodos, myToggle, myRemove } = this.props;
+        const { myTodos } = this.props;
         /*
            const { id,text,checked } = todo;
         */
@@ -26,8 +26,6 @@ class TodoItemList extends Component {
             <TodoItem id={id}
                 text={text}
                 checked={checked}
-                onToggle={myToggle}
-                onRemove={myRemove}
                 key={id}
             />
         ));
@@ -41,8 +39,6 @@ class TodoItemList extends Component {
 
 TodoItemList.propTypes = {
     myTodos: PropTypes.array,
-    myToggle: PropTypes.func,
-    myRemove: PropTypes.func,
     getTodos: PropTypes.func,
 };
 export default connect(
