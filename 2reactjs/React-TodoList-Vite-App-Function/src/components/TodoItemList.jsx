@@ -1,8 +1,23 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import TodoItem from './TodoItem';
 
-const TodoItemList = ({ myTodos, myToggle, myRemove }) => {
+import TodoItem from './TodoItem';
+import { fetchAllTodos } from '@/reducers/todoSlice';
+
+const TodoItemList = ({ myToggle, myRemove }) => {
+  const myTodos = useSelector((state) => state.todos);
+  const dispatch = useDispatch();
+
+  /*
+    action 함수 dispatch 하기
+    useEffect() hook
+    componentDidMount + componentDidUpdate + componentWillUnMount
+  */
+  useEffect(() => {
+    dispatch(fetchAllTodos());
+  },[dispatch]);
+
   const todoList = myTodos.map(
     ({ id, text, checked }) => (
       <TodoItem
@@ -24,7 +39,6 @@ const TodoItemList = ({ myTodos, myToggle, myRemove }) => {
 };
 
 TodoItemList.propTypes = {
-  myTodos: PropTypes.array,
   myToggle: PropTypes.func,
   myRemove: PropTypes.func
 };
