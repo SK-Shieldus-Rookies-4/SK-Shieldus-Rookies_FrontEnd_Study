@@ -1,7 +1,8 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addTodo } from '@actions';
+
+import { addTodo } from '@/actions';
 import '@components/Form.css';
 
 class Form extends Component {
@@ -22,8 +23,7 @@ class Form extends Component {
             text: todo,
             checked: false
         };
-
-        //Action 함수 호출
+        //Action 함수호출하기
         this.props.addTodo(newTodo);
 
         this.setState({
