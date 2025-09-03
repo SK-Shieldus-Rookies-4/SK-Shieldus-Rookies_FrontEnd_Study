@@ -1,15 +1,26 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import './Form.css';
 
-const FunctionalForm = ({ myTodo, myEnter, myChange, myCreate }) => {
+const FunctionalForm = () => {
+  const [todo, setTodo] = useState('');
+  const dispatch = useDispatch();
+
+  //이벤트핸들러 함수 선언
+  const handleChange = (e) => {
+    console.log('handleChange =' + e.target.value);
+    setTodo(e.target.value);
+  }; //handleChange
+
   return (
     <div className="form">
-      <input 
-        value={myTodo} 
-        onChange={myChange}
-        onKeyDown={myEnter} 
+      <input
+        value={todo}
+        onChange={handleChange}
       />
-      <div className="create-button" onClick={myCreate}>
+      <div className="create-button">
         추가
       </div>
     </div>
@@ -17,7 +28,6 @@ const FunctionalForm = ({ myTodo, myEnter, myChange, myCreate }) => {
 };
 
 FunctionalForm.propTypes = {
-  myTodo: PropTypes.string,
   myEnter: PropTypes.func,
   myChange: PropTypes.func,
   myCreate: PropTypes.func
