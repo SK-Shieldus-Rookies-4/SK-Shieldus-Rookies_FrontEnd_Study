@@ -18,10 +18,9 @@ class Form extends Component {
 }
 
 Form.propTypes = {
-    mytodo: PropTypes.string.isRequired,
-    myEnter: PropTypes.func.isRequired,
-    myChange: PropTypes.func.isRequired,
-    myCreate: PropTypes.func.isRequired
+    mytodo: PropTypes.string,
+    myEnter: PropTypes.func,
+    myChange: PropTypes.func,
+    myCreate: PropTypes.func
 };
-
 export default Form;

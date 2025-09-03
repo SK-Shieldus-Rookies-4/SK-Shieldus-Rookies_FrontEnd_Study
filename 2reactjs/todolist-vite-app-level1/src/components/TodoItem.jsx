@@ -4,9 +4,9 @@ import './TodoItem.css';
 
 class TodoItem extends Component {
     /*
-       true 리턴 (checked 변수에 변경이 있는 경우)이면 render() 함수가 호출됨
-       false 리턴 (checked 변수에 변경이 없는 경우)이면 render() 함수가 호출되지 않음
-    */
+        true 리턴 (checked 변수에 변동이 있는 경우)이면 render() 함수가 호출됨
+        false 리턴 (checked 변수에 변동이 없는 경우)이면 render() 함수가 호출되지 않음(렌더링 생략)
+    */    
     shouldComponentUpdate(nextProps, nextState) {
         return this.props.checked !== nextProps.checked;
     }
@@ -38,5 +38,4 @@ TodoItem.propTypes = {
     onToggle: PropTypes.func,
     onRemove: PropTypes.func
 };
-
 export default TodoItem
