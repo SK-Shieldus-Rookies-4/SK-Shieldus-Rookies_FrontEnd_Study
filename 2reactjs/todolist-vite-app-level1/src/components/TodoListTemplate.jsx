@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import './TodoListTemplate.css';
+import '@components/TodoListTemplate.css';
 
 const TodoListTemplate = ({ form, children }) => {
     return (

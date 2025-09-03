@@ -1,49 +1,56 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
-import { fetchAllTodos } from '@/actions'
-import TodoItem from '@components/TodoItem';
+//import { removeTodo, toggleTodo } from '@/actions';
+import { removeTodo, toggleTodo } from '@/reducers/todoSlice';
+import '@components/TodoItem.css';
 
-class TodoItemList extends Component {
-    componentDidMount() {
-        this.props.getTodos();
-    }
+class TodoItem extends Component {
     /*
-        true 리턴 (myTodos 변수에 변동이 있는 경우)이면 render() 함수가 호출됨
-        false 리턴 (myTodos 변수에 변동이 없는 경우)이면 render() 함수가 호출되지 않음(렌더링 생략)
+        true 리턴 (checked 변수에 변동이 있는 경우)이면 render() 함수가 호출됨
+        false 리턴 (checked 변수에 변동이 없는 경우)이면 render() 함수가 호출되지 않음(렌더링 생략)
     */
     shouldComponentUpdate(nextProps, nextState) {
-        return this.props.myTodos !== nextProps.myTodos;
+        return this.props.checked !== nextProps.checked;
     }
 
+    handleToggle = (todo) => {
+        todo.checked = !todo.checked;
+        this.props.toggleTodo(todo)
+    }; //handleToggle
+
+    handleRemove = (id) => {
+        this.props.removeTodo(id);
+    }; //handleRemove
+
     render() {
-        const { myTodos } = this.props;
-        /*
-           const { id,text,checked } = todo;
-        */
-        const todoList = myTodos.map(({ id, text, checked }) => (
-            <TodoItem id={id}
-                text={text}
-                checked={checked}
-                key={id}
-            />
-        ));
+        const { text, checked, id } = this.props;
+        const { handleToggle, handleRemove } = this;
+
         return (
-            <div>
-                {todoList}
+            <div className="todo-item" onClick={() => handleToggle({ text, checked, id })}>
+                <div className="remove" onClick={(e) => {
+                    e.stopPropagation(); // onToggle 이 실행되지 않도록 함
+                    handleRemove(id)
+                }
+                }>&times;</div>
+                <div className={`todo-text ${checked && 'checked'}`}>
+                    <div>{text}</div>
+                </div>
+                {
+                    checked && (<div className="check-mark">✓</div>)
+                }
             </div>
         );
     }
 }
 
-TodoItemList.propTypes = {
-    myTodos: PropTypes.array,
-    getTodos: PropTypes.func,
+TodoItem.propTypes = {
+    text: PropTypes.string,
+    checked: PropTypes.bool,
+    id: PropTypes.number,
+    toggleTodo: PropTypes.func,
+    removeTodo: PropTypes.func
 };
-export default connect(
-    //store에 저장된 todos를 가져와서 myTodos 프로퍼티에 매핑하기
-    (state) => ({myTodos: state.todos}),
-    //action함수를 dispatch 하는 함수를 getTodos 프로퍼티에 매핑하기
-    { getTodos: fetchAllTodos } // fetchAllTodos 프로터티에 매핑한다면 { fetchAllTodos }
-)(TodoItemList);
+export default connect(null,{ removeTodo, toggleTodo })(TodoItem)
