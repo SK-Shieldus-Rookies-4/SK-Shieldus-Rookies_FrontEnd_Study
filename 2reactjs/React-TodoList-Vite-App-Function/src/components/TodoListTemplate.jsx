@@ -1,6 +1,6 @@
 import './TodoListTemplate.css';
 
-const FuctionalTodoListTemplate = ({ form, children }) => {
+const TodoListTemplate = ({ form, children }) => {
     return (
         <main className="todo-list-template">
             <div className="title">
@@ -15,4 +15,4 @@ const FuctionalTodoListTemplate = ({ form, children }) => {
         </main>
     );
 };
-export default FuctionalTodoListTemplate;
+export default TodoListTemplate;

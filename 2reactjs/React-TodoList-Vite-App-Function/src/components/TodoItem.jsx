@@ -2,7 +2,7 @@ import { memo } from 'react';
 import PropTypes from 'prop-types';
 import './TodoItem.css';
 
-const FunctionalTodoItem = ({ text, checked, id, onToggle, onRemove }) => {
+const TodoItem = ({ text, checked, id, onToggle, onRemove }) => {
   return (
     <div className="todo-item" onClick={() => onToggle(id)}>
       <div 
@@ -22,7 +22,7 @@ const FunctionalTodoItem = ({ text, checked, id, onToggle, onRemove }) => {
   );
 };
 
-FunctionalTodoItem.propTypes = {
+TodoItem.propTypes = {
   text: PropTypes.string,
   checked: PropTypes.bool,
   id: PropTypes.number,
@@ -33,6 +33,6 @@ FunctionalTodoItem.propTypes = {
 // memo를 사용하여 shouldComponentUpdate 대체
 // checked가 변경될 때만 리렌더링
 export default memo(
-  FunctionalTodoItem,
+  TodoItem,
   (prevProps, nextProps) => prevProps.checked === nextProps.checked
 );
